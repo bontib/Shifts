@@ -1,15 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import HomeScreen from './screens/home.screen';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+
+const stack = createStackNavigator();
 
 export default function App() {
+  const scheme = useColorScheme();
   return (
-    <View>
-      
-    </View>
+    <AppearanceProvider>
+      <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <stack.Navigator>
+          <stack.Screen name="Home" component={HomeScreen} />
+        </stack.Navigator>
+      </NavigationContainer>
+    </AppearanceProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  
-});
